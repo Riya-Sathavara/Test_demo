@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+        
+        <record model="ir.ui.view" id="demo_credential_tree_view">
+            <field name="name">demo.credential.tree</field>
+            <field name="model">demo.credential</field>
+            <field name="arch" type="xml">
+		     <tree string="Credential">
+					<field name="name"/>
+					<field name="age"/>
+					<field name="date_join"/>
+					<field name="description"/>
+					<field name="gender"/>
+					<field name="bod"/>
+					<field name="task_id"/>
+				</tree>
+				</field>
+				</record>
+
+        <record model="ir.ui.view" id="demo_credential_form_view">
+            <field name="name">demo.credential.form</field>
+            <field name="model">demo.credential</field>
+            <field name="arch" type="xml">
+			<form string="Credential">
+					<header>
+						<button string="Set to draft" type="object" name="concept_progressbar" attrs="{'invisible': [('state', '=', 'Draft')]}" groups="stock.group_stock_manager"/>
+			            <button string="Set to approve" type="object" name="approve_progressbar" class="oe_highlight" attrs="{'invisible': [('state','=','Approve')]}"/>
+			            <button string="Set to progres" type="object" name="proces_progressbar" class="oe_highlight" attrs="{'invisible': [('state','=','progress')]}"/>
+			            <button string="Set to done" type="object" name="done_progressbar" class="oe_highlight" attrs="{'invisible': [('state','=','Done')]}"/>
+			            <button string="Wizard" type="object" name="click_button_wizard_view"/>
+			            
+			            <field name="state" widget="statusbar" clickable="True"/>
+					
+			<!-- 			<field name="state" widget="statusbar" />   -->
+						
+			<!-- 			<button string="In progress" type="object" name="progress_progressbar" attrs="{'invisible': [('state','=','progress')]}"/> -->
+			<!-- 			<field name="state" widget="statusbar" clickable="True" />            widget= "selection" "many2onebutton"  nolabel="1" statusbar_visible="Approve" statusbar_colors="{&quot;proforma&quot;:&quot;blue&quot;,&quot;proforma2&quot;:&quot;blue&quot;}"    -->
+					</header>
+					<sheet>  <!--  for put size box in form view -->
+						<field name="ima" widget="image" class="oe_left oe_avatar"/>
+					<group>
+						<group>
+							<field name="name"/>
+							<field name="bod"/>
+							<field name="age"/>
+						</group>
+						<group>
+							<field name="date_join" required="True"/>
+							<field name="gender"/>
+						</group>
+						<group>
+							<field name="task_id"/>
+						</group>
+			<!-- 			<group> -->
+			<!-- 				<field name="sem1"/> -->
+			<!-- 				<field name="sem2"/> -->
+			<!-- 				<field name="total"/> -->
+			<!-- 			</group> -->
+						<group>
+							<field name="description" placeholder="Put the description"/>
+						</group>
+						<group>
+							<button name="get_data" string="Test1" type="object"/>
+						</group>
+					</group>
+					<notebook colspan="4">
+			         	<page string="Personal" name="personal">
+			          		<field name="info_ids">
+			           		<tree string="Data information" editable="bottom">
+			           			<!-- when click on Add Item then editable in bottom not open pop - up -->
+			             		<field name="f_name"/>
+			              		<field name="m_name"/>
+			                 	<field name="email"/>
+			                 </tree>
+			                 </field>
+			           </page>
+			           <page string="Working Details">
+			            <group string="Working Details">
+			             	<group>
+			              		<field name="dept"/>
+			              	</group>
+			                 <group>
+			                     <field name="position"/>
+			                 </group>
+			                  <group>
+			                     <field name="salary"/>
+			                 </group>
+			           </group>
+			           <group>
+			            	<group class="oe_subtotal_footer oe_right" colspan="2">
+			                      <field name="sem1" widget="monetary" options="{'sem1': 'sem1'}"/>
+			                       <field name="sem2" widget="monetary" options="{'sem2': 'sem2'}"/>
+			                          <div class="oe_subtotal_footer_separator oe_inline">
+			                             <label for="total"/>
+			<!--                             <button name="button_dummy" -->
+			<!--                              states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/> -->
+			                          </div>
+			                          <field name="total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+					                   </group>
+					                </group>
+					             </page>
+					             <page string="Demo">
+					             	<field name="us_data_ids" widget="many2many_tags"> 
+					             	</field>
+					           </page>
+					          </notebook>
+					          </sheet>
+			                <div class="oe_chatter">
+			                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+			                    <field name="message_ids" widget="mail_thread"/>
+			                </div>
+						 </form>
+			            </field>
+        			</record>
+        			
+        			
+       <record id="action_demo_credntial" model="ir.actions.act_window">
+			<field name="name">Credential</field>
+			<field name="res_model">demo.credential</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+            	
+            	
+     <record model="ir.ui.view" id="demo_info_tree">
+            <field name="name">data.information.tree</field>
+            <field name="model">demo.info</field>
+            <field name="arch" type="xml">       	
+		    <tree>
+				<field name="f_name"/>
+				<field name="m_name"/>
+				<field name="email"/>
+			</tree>
+			</field>
+			</record>
+			
+	
+	
+	    <record model="ir.ui.view" id="demo_info_form">
+            <field name="name">data.information.form</field>
+            <field name="model">demo.info</field>
+            <field name="arch" type="xml">       	
+			<form string="Data Information">
+			<sheet>
+				<group>
+					<group>
+						<field name="f_name"/>
+						<field name="credential_id" invisible="1"/>
+					</group>
+					<group>
+						<field name="m_name"/>
+						<field name="email"/>
+					</group>
+				</group>
+			</sheet>
+		</form>
+		</field>
+		</record>
+		        			
+        <record id="action_demo_info" model="ir.actions.act_window">
+			<field name="name">Information</field>
+			<field name="res_model">demo.info</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+            
+            
+<!--        <record id="view_data_credential_inhert" model="ir.ui.view"> -->
+<!--             <field name="name">demo_credentia_inhert_form</field> -->
+<!--             <field name="model">demo.credential</field> -->
+<!--             <field name="inherit_id" ref="project.view_task_form2"/> -->
+<!--             <field name="help" type="html"> -->
+<!--                 <xpath expr="//page[@string='Description']" position="after"> -->
+<!--                     <page string="Demo Credential"> -->
+<!--                     	<field name="name"/> -->
+<!--                     	<field name="state"/> -->
+<!--                     	<field name="task_id"/> -->
+<!--                     </page> -->
+<!--                 </xpath> -->
+<!--             </field> -->
+<!--         </record>		 -->
+        			
+        			
+        	<menuitem id="demo_root" name="Demo data"/>
+        	<menuitem id="demo_sub_menu" name="Demo data" parent="demo_root"/>
+        	<menuitem id="demo_sub_sub_menu" name="Credential" parent="demo_sub_menu" action="action_demo_credntial" />
+        	<menuitem id="demo_info" name="Data Information" parent="demo_root"/>
+        	<menuitem id="demo_info_sub" name="Information" parent="demo_info" action="action_demo_info"/>
+     
+        			
+        			
+        			
+
+	 	</data>
+</openerp>
