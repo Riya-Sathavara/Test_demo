@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+	<report
+	    id="demo_credential_report_format"
+	    model="demo.credential"
+	    string="Demo Credential Data"
+	    report_type="qweb-pdf"
+	    name="demo_report.credential_report"
+	    file="demo_report.credential_report"
+	/>
+	
+
+	<template id="credential_report">
+		<t t-foreach="docs" t-as="o">
+		<div class="page">
+			
+			<div>
+				<b style="font-size: 25px;width:100%;" >Name :</b>
+				<span t-field = "o.name" style="font-size: 20px;"/>
+			</div>
+			<br/>
+			<table> 
+				<tr> 
+					<td ><b>Project Name :</b></td>
+					<td style="width:60%;">
+						<span t-field ="o.task_id.project_id"/>
+					</td>
+					<td > <b>Project Manager : </b></td>
+					<td>
+						<span t-field = "o.task_id.project_id.user_id"/>
+					</td> 
+				</tr>
+				</table><br/><br/>
+				<table>
+				<tr> 
+					<td style="text-align:right"><b>Date Of Birth :</b></td>
+					<td style="padding-right: 100px;width:70%;" >
+						<span t-field ="o.bod"/>
+					</td>
+					<td > <b>Gender : </b></td>
+					<td>
+						<span t-field = "o.gender"/>
+					</td> 
+				</tr >
+				<tr>
+					<td><b>Age :</b></td>
+					<td style="width:70%;">
+						<span t-field = "o.age"/>
+					</td>
+					<td><b>Email-id :</b></td>
+					<td>
+						<span t-field = "o.email"/>
+					</td>
+				</tr>
+          	</table><br/><br/>
+			<table style="width:90%; border-collapse: collapse;">
+				<t t-set="a" t-value="0"/> 
+				<tr style="background-color: rgba(3, 255, 243, 0.09);">
+					<th style="border-bottom: 1px solid #ddd; height: 46px;">Work Summary</th>
+					<th style="border-bottom: 1px solid #ddd;">Time Spent</th>
+					<th style="border-bottom: 1px solid #ddd;">Date</th>
+					<th style="border-bottom: 1px solid #ddd;">Done By</th>
+				</tr>
+				<tr style=" height: 40px;" t-foreach="o.task_id.work_ids" t-as="l">
+					<td style="border-bottom: 1px solid #ddd; width: 250px;  padding-left: 28px;">
+						<span t-field = "l.name"/>
+					</td>
+					<td style="border-bottom: 1px solid #ddd; text-align: right; padding-right: 16px;">
+						<span t-field = "l.hours"/> 
+						<t t-set="a" t-value="a+l.hours"/>
+					</td>
+					<td style="border-bottom: 1px solid #ddd; text-align:right; padding-right: 20px; width: 300px;">
+						<span t-field="l.date"/>
+					</td>
+					<td style="border-bottom: 1px solid #ddd; padding-left: 25px;">
+						<span t-field="l.user_id"/>
+					</td>
+				</tr>
+				</table>
+				<table>
+				<tr>
+					<td style="text-align:right; width: 273px;"> Total :</td>
+					<td style="border: 1px solid #ddd;text-align: right; padding-right: 16px; width: 209px;  height: 32px;">
+						<t t-esc="a"/>
+					</td>
+				</tr>
+			</table><br/><br/>
+			<b style="font-size: 23px;"> Description: </b>
+			<table style="width:90%;height: 80px;border: 1px solid #ddd;">		
+					<tr>
+						<td style="padding-bottom: 45px;">
+							<span t-field="o.description"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</t>
+	</template>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</data>
+</openerp>
