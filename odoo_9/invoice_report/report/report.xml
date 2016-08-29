@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	<delete model="ir.ui.view" id="report_invoice_document_inherit_sale_stock"/>
+	<template id="invoice_report_ext" inherit_id="account.report_invoice_document">
+	<xpath expr="//div[@class='page']" position="replace">
+				<div class="page">
+	           hello hiii
+				</div>
+    		</xpath>
+	</template>
+	
+<!-- 			<xpath expr="//table[@class='table table-condensed']" position="replace"> -->
+<!--                 <div id="my_new_div"> -->
+<!--                     Hello, World! -->
+<!--                 </div> -->
+<!--             </xpath> -->
+<!--             <xpath expr="//div[@class='row']" position="replace"> -->
+<!--                 <div id="my_new_div"> -->
+<!--                     Hello, World! -->
+<!--                 </div> -->
+<!--             </xpath> -->
+<!--             <xpath expr="//div[@class='row mt32 mb32']//div" position="replace"> -->
+<!--                 <div id="my_new_div" > -->
+<!--                     Hello, World! -->
+<!--                 </div> -->
+<!--             </xpath> -->
+<!-- 	</template> -->
+	
+<!-- 	<template id="invoice_report_ext1" inherit_id="account.report_invoice_document"> -->
+<!-- 	<xpath expr="//div[@class='page']" position="replace"> -->
+<!-- 				<div class="page"> -->
+<!-- 				hello -->
+<!-- 				</div> -->
+<!--     		</xpath> -->
+<!-- 	</template> -->
+
+	</data>
+</openerp>
