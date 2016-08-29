@@ -1,0 +1,2 @@
+import purchase_report_test
+import inherit_purchase_report

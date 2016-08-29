@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<!--   hide the Manufacturing button -->
+		<record id="manufacture_change_view" model = "ir.ui.view" >
+		<field name="name" >mrp.production.form  </field>
+		<field name="model">mrp.production</field>
+		<field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//page[@string='Work Orders']">
+			<button name="action_compute" string="Compute Data" invisible = "1"/>
+			</xpath>
+	     </field>
+		</record>
+
+ <!-- Treee View --> 
+
+		<record id="manu_change_view" model="ir.ui.view">
+		<field name="name" >manu.data.tree</field>
+		<field name="model">manu.data</field>
+		<field name="arch" type="xml">
+		<tree string = "Daaata">
+			<field name="name"/>
+			<field name="task_id"/>
+		</tree>
+		</field>
+		</record>
+ 
+ 
+  <!-- -Form View --> 
+ 
+ 
+ 		<record id="manu_change_form" model ="ir.ui.view">
+ 		<field name="name">manu.data.form</field>
+  		<field name="model">manu.data</field>
+ 		<field name="arch" type="xml">
+ 		<form string = "form view">
+ 			<sheet>
+ 				<group>
+ 					<group>
+<!--  						<field name="name"/> -->
+ 						<field name="task_id"/>
+ 					</group>
+ 				</group>
+ 			</sheet>
+ 		</form>
+ 		</field>
+ 		</record>
+ 		
+ <!--  Action View --> 
+ 		<record id="manu_change_action" model="ir.actions.act_window">
+ 		<field name="name">data</field>
+ 		<field name="res_model">manu.data</field>
+ 		<field name="view_type">tree</field>
+ 		<field name="view_mode">form,tree</field>
+ 		<field name="help" type="html">
+
+		
+ 			<p>
+            Click to start a new work order. 
+            </p>
+ 		</field>
+ 		</record>
+ 		
+ 		<menuitem id="manu_root_menu" name="Changes"/>
+ 		<menuitem id="manu_root_sub_menu" parent="manu_root_menu" name="Changes" />
+ 		<menuitem id="manu_root_sub_sub_menu" parent="manu_root_sub_menu" name="Credential" action = "manu_change_action"/>
+ 		 
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+</data>
+</openerp>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<report 
+            id="report_purchase_test"
+            model="purchase.order"
+            string="Purchase Order Test Report"
+            report_type="qweb-pdf"
+            name="test_qweb_report.purchase_test_report"
+            file="test_qweb_report.purchase_test_report"
+            
+        />
+        
+        <template id="test_qweb_report.purchase_test_report">
+			<t t-call="test_qweb_report.report_header_template" />
+			<t t-set="total" t-value="0"/>
+        	<div class="page">
+<!--         		<t t-foreach="[1,2,3]" t-as="i"> -->
+<!--         			<t t-esc="i_index" /> -->
+<!--         			<t t-esc="i_value" /> -->
+<!--         			<t t-esc="i_all" /> -->
+<!--         		</t> -->
+
+<!-- 				<table width="100%" style="border: 1px solid black;line-height: 30px;"> -->
+<!-- 					<tr t-foreach="[1,2,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7]" t-as="i"> -->
+<!-- 						<td width="10%" style="padding-left: 15px;background: #ead5b9;" t-if="i_even"> -->
+<!-- 							<t t-esc="i_value" /> -->
+<!-- 						</td> -->
+<!-- 						<td width="10%" style="padding-left: 15px;background: #f1e5d7" t-if="i_odd"> -->
+<!-- 							<t t-esc="i_value" /> -->
+<!-- 						</td> -->
+
+<!-- 						<td width="10%" style="padding-left: 15px;background: #ead5b9;" t-if="i_even"> -->
+<!-- 							this is even -->
+<!-- 						</td> -->
+<!-- 						<td width="10%" style="padding-left: 15px;background: #f1e5d7" t-if="i_odd"> -->
+<!-- 							this is odd -->
+<!-- 						</td> -->
+
+<!-- 						<td width="10%" style="padding-left: 15px;background: #ead5b9;" t-if="i_even"> -->
+<!-- 							<t t-esc="i_parity" /> -->
+<!-- 						</td> -->
+<!-- 						<td width="10%" style="padding-left: 15px;background: #f1e5d7" t-if="i_odd"> -->
+<!-- 							<t t-esc="i_parity" /> -->
+<!-- 						</td> -->
+<!-- 						<td> <p>aaaaaa</p>-->
+<!-- 							<t t-if="i_index % 4 == 0"> -->
+<!-- 								<div style="page-break-before: always;"> -->
+<!-- 									this is page break -->
+<!-- 								</div> -->
+<!-- 							</t> -->
+<!-- 						</td> -->
+<!-- 					</tr> -->
+<!-- 				</table> -->
+
+
+<!-- 				<table width="100%" style="border: 1px solid black;"> -->
+<!-- 					<t t-set="no" t-value="0"/> -->
+<!-- 					<tr t-foreach="[1,2,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7,3,4,5,6,7]" t-as="i"> -->
+<!-- 						<t t-set="no" t-value="no + i_index"/> -->
+<!-- 						<t t-set="total" t-value="total + i_index"/> -->
+<!-- 						<div> -->
+<!-- 						<td style="padding-left: 15px;background: #ead5b9;" > -->
+<!-- 							<t t-esc="i_index" /> -->
+<!-- 						</td> -->
+
+<!-- 						<td style="padding-left: 15px;background: #ead5b9;" > -->
+<!-- 							<t t-esc="i_value" /> -->
+<!-- 						</td> -->
+
+<!-- 						<td style="padding-left: 15px;background: #ead5b9;" > -->
+<!-- 							<t t-esc="i_parity" /> -->
+<!-- 						</td> -->
+<!-- 						<td> -->
+<!-- 							<t t-if="i_index % 5 == 0"> -->
+<!-- 								<div style="page-break-before: always;"> -->
+<!-- 									this is page break<t t-esc="no" /> -->
+<!-- 								</div> -->
+<!-- 								<t t-set="no" t-value="0"/> -->
+<!-- 							</t> -->
+<!-- 						</td> -->
+<!-- 						</div> -->
+<!-- 					</tr> -->
+<!-- 				</table> -->
+				<div class="row" width="100%" style="">
+					<t t-set="no" t-value="0"/>
+						<div class="row" t-foreach="[1,2,3,4,5,]" t-as="i">
+							<t t-set="no" t-value="no + i_index"/>
+							<t t-set="total" t-value="total + i_index"/>
+								<div class="col-xs-4" style="padding-left: 15px;background: #ead5b9;" >
+									<t t-esc="i_index" />
+								</div>		
+								<div class="col-xs-4" style="padding-left: 15px;background: #ead5b9;" >
+									<t t-esc="i_value" />
+								</div>
+		
+								<div class="col-xs-4" style="padding-left: 15px;background: #ead5b9;" >
+									<t t-esc="i_parity" />
+								</div>			
+								<div>
+									<t t-if="i_index % 5 == 0">
+										<div style="page-break-before: always;">
+											this is page break<t t-esc="no" />
+										</div>
+<!-- 										<t t-set="no" t-value="0"/> -->
+									</t>
+								</div>	
+						</div>
+				</div>
+
+			<div class="row">
+                <div class="col-xs-3">
+                    <strong>Our Order Reference:</strong>
+                    <strong><t t-esc="test(o)" /></strong>
+                    
+                </div>
+                <div class="col-xs-3">
+                    <strong>Your Order Reference</strong>
+                    
+                </div>
+                <div class="col-xs-3">
+                    <strong>Order Date:</strong>
+                    
+                </div>
+                <div class="col-xs-3">
+                    <strong>Validated By:</strong>
+                    
+                </div>
+            </div>
+
+
+
+        	</div>
+        	<t t-set="no" t-value="0"/>
+        	<div class="footer">
+        		<t t-set="no" t-value="no + 1"/>
+				<p>This is footer</p>    
+		    	<div class="last-page">
+		    		<t t-esc="no" />
+					this is not last page 2 it will not come in last page
+		    		<t t-esc="total" />
+		    	</div>
+				    		
+        	</div>
+
+        </template>
+    </data>
+</openerp>
