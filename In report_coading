@@ -1,0 +1,51 @@
+###################### In Report ##########3
+
+###3for total########:
+
+step 1: set variable <t t-set="a" t-value="0"/> 
+step 2 : In which field you can a get total : 
+		<td style="text-align:right; padding-right: 19px; border:1px solid #ddd;">
+						<span t-field="l.product_uos_qty"/>
+						<t t-set="a" t-value="a+l.product_uos_qty"/>
+					</td>
+
+step 3: display the total : (Diffrent tr can be also used)
+	 <td style="text-align: right; padding-right: 9px;"> Total :</td>
+					<td style="text-align: right; padding-right: 23px; border: 1px solid #ddd;">
+						<t t-esc="a"/>
+					</td>
+
+########## through function also get total #########
+
+step 1: py file 
+	
+	self.localcontext.update({
+            'demo': self._demo,
+            'dot': self._dot,
+            'sub_total' : self._sub_total,
+         
+        })
+
+
+	then make function;
+	
+	def _sub_total(self,object):
+        sub_total= 0
+        for line in object.order_line:
+                sub_total += line.price_subtotal 
+        return sub_total
+
+
+
+class credential_report_sale_ext(osv.AbstractModel):
+    _name = 'report.sale_report_extend.sale_data_report' ## here report then  mosule name nd template id or inherit reoprt module name nd then 											tempale id
+    _inherit = 'report.abstract_report'        # that is not change
+    _template = 'sale_report_extend.sale_data_report' # copy from the name
+    _wrapped_report_class = sale_extend_data   # that is class name of thaat py file
+
+step 2: xml file 
+
+	<td style="text-align: end; padding-right: 13px;"> Sub Total : </td>
+					<td style="text-align: right; padding-right: 13px;">
+						 <t t-esc="sub_total(o)"/>
+ 					</td>
