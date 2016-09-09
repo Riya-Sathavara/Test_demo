@@ -1,0 +1,14 @@
+jQuery(document).ready(function($){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+$( document ).ready( function() {
+  $('.responsive-slider').responsiveSlider();
+});
+
+$( document ).ready( function() {
+  $('.responsive-slider').responsiveSlider({
+    onSlideNext: function() { console.log(this) }
+  });
+});
+
+
+});

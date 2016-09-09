@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="contactus_form_smeet_website" name="Smeet Website" inherit_id="website_crm.contactus_form" customize_show="True">
+    <xpath expr="//div[@name='email_from_container']" position="replace">
+    	<p>hello</p>
+<!--         <div t-attf-class="form-group #{error and 'partner_name' in error and 'has-error' or ''}"> -->
+<!--             <label class="col-md-3 col-sm-4 control-label" for="partner_name">Company</label> -->
+<!--             <div class="col-md-7 col-sm-8"> -->
+<!--                 <input type="text" class="form-control" name="partner_name" required="True" t-attf-value="#{partner_name or ''}"/> -->
+<!--             </div> -->
+<!--         </div> -->
+    </xpath>
+</template>
+
+</data>
+</openerp>

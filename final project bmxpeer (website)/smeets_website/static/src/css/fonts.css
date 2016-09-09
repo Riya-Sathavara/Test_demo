@@ -1,0 +1,28 @@
+
+@font-face {
+	font-family:'AvantGarde-Book';
+	src: url('../fonts/AvantGarde-Book_gdi.eot');
+	src: url('../fonts/AvantGarde-Book_gdi.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/AvantGarde-Book_gdi.woff') format('woff'),
+		url('../fonts/AvantGarde-Book_gdi.ttf') format('truetype'),
+		url('../fonts/AvantGarde-Book_gdi.svg#AvantGarde-Book') format('svg');
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+000D-0394;
+}
+
+
+@font-face {
+	font-family:'Aller-Bold';
+	src: url('../fonts/Aller-Bold_gdi.eot');
+	src: url('../fonts/Aller-Bold_gdi.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Aller-Bold_gdi.woff') format('woff'),
+		url('../fonts/Aller-Bold_gdi.ttf') format('truetype'),
+		url('../fonts/Aller-Bold_gdi.svg#Aller-Bold') format('svg');
+	font-weight: 700;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+0008-2212;
+}
+

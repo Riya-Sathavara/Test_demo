@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="smeet_aboutus" inherit_id="website.aboutus" name="smeet aboutus page">
+			<xpath expr="//section[@data-snippet-id='title']" position="replace">
+				<section class="oe_dark mb16 mt0" style="height: 144px; overflow: hidden;">
+					<div class="about-container">
+						<div class="row">
+					`		<div class="col-sm-12 col-md-12 mb4">
+								<div class="col-sm-6 col-md-6 blog-img">					
+									<h2 class="banner-head" >About BMX Peer</h2>
+								</div>
+								<div class="col-sm-6 col-md-6 blog-img-2" style="padding:0;">
+									<img  class="" src="/smeets_website/static/src/images/top-right-bg.png"/>
+									<h4 class="banner-head1">Home/About BMX Peer</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+		</xpath>
+
+	</template>
+
+
+</data>
+</openerp>
