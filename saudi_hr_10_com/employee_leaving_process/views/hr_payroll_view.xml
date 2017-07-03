@@ -1,0 +1,16 @@
+<odoo>
+	<data>
+		<!-- Added EOS in Payslip -->
+		<record id="view_view_hr_payslip_form_inherit_eos" model="ir.ui.view">
+        <field name="name">hr.payslip.eos</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <field name="credit_note" position="after">
+                <field name="add_eos" attrs="{'invisible': [('eos_id', '=',False)], 'readonly': [('state', '!=','draft')]}"/>
+                <field name="eos_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+	</data>
+</odoo>

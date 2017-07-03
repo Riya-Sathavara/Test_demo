@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--     Flight Booking -->
+        <record id="mt_flight_booking_confirmed" model="mail.message.subtype">
+            <field name="name">Submitted</field>
+            <field name="res_model">flight.booking</field>
+            <field name="relation_field">state</field>
+            <field name="description">Flight Booking submitted, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        <record id="mt_flight_booking_validated" model="mail.message.subtype">
+            <field name="name">Validated</field>
+            <field name="res_model">flight.booking</field>
+            <field name="relation_field">state</field>
+            <field name="description">Flight Booking Validated, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        <record id="mt_flight_booking_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">flight.booking</field>
+            <field name="relation_field">state</field>
+            <field name="description">Flight Booking Approved</field>
+            <field name="default" eval="True"/>
+        </record>
+        
+        <record id="mt_flight_booking_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">flight.booking</field>
+            <field name="description">Flight Booking submitted, refuse</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <record id="mt_flight_booking_canceled" model="mail.message.subtype">
+            <field name="name">Canceled</field>
+            <field name="res_model">flight.booking</field>
+            <field name="description">Flight Booking submitted, cancel</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <!-- Hotel Booking -->
+        <record id="mt_hotel_booking_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">hotel.booking</field>
+            <field name="description">Hotel Booking submitted, waiting for approval</field>
+            <field name="default" eval="True"/>
+        </record> 
+
+        <record id="mt_hotel_booking_validated" model="mail.message.subtype">
+            <field name="name">Validated</field>
+            <field name="res_model">hotel.booking</field>
+            <field name="description">Hotel Booking submitted, validated</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_hotel_booking_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">hotel.booking</field>
+            <field name="description">Hotel Booking submitted, approved</field>
+            <field name="default" eval="True"/>
+        </record>    
+
+        <record id="mt_hotel_booking_canceled" model="mail.message.subtype">
+            <field name="name">Canceled</field>
+            <field name="res_model">hotel.booking</field>
+            <field name="description">Hotel Booking submitted, Canceled</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_hotel_booking_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">hotel.booking</field>
+            <field name="description">Hotel Booking submitted, Refused</field>
+            <field name="default" eval="True"/>
+        </record> 
+
+        <!--Ticket Details -->
+        <record id="mt_ticket_details_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">ticket.detailsg</field>
+            <field name="description">Ticket Details submitted, waiting for approval</field>
+            <field name="default" eval="True"/>
+        </record> 
+
+        <record id="mt_ticket_details_validated" model="mail.message.subtype">
+            <field name="name">Validated</field>
+            <field name="res_model">ticket.details</field>
+            <field name="description">Ticket Details submitted, validated</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_ticket_details_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">ticket.details</field>
+            <field name="description">Ticket Details submitted, approved</field>
+            <field name="default" eval="True"/>
+        </record>    
+
+        <record id="mt_ticket_details_canceled" model="mail.message.subtype">
+            <field name="name">Canceled</field>
+            <field name="res_model">ticket.details</field>
+            <field name="description">Ticket Details submitted, Canceled</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_ticket_details_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">ticket.details</field>
+            <field name="description">Ticket Details submitted, Refused</field>
+            <field name="default" eval="True"/>
+        </record>         
+    </data>
+</odoo>

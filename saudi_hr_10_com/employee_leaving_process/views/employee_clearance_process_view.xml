@@ -1,0 +1,161 @@
+<odoo>
+    <data>
+        <!-- Employee Clearance  List view -->
+
+        <record model="ir.ui.view" id="view_employee_clearance_process_tree">
+            <field name="name">employee.clearance.process.tree</field>
+            <field name="model">employee.clearance.process</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Clearance  List" decoration-bf="message_needaction==True">
+                    <field name="employee_id" />
+                    <field name="employee_code" />
+                    <field name="handle_by" />
+                    <field name="office" />
+                    <field name="requested_date" />
+                    <field name="notice_start_date" />
+                    <field name="notice_end_date" />
+                    <field name="state" />
+                    <field name="message_needaction_counter" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Employee Clearance  Form view -->
+
+        <record model="ir.ui.view" id="view_employee_clearance_process_form">
+            <field name="name">employee.clearance.process.form</field>
+            <field name="model">employee.clearance.process</field>
+            <field name="arch" type="xml">
+                <form string="Employee Clearance Form">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" class="btn-primary" type="object" string="Confirm" states="draft"/>
+                        <button name="action_approve" class="btn-primary" type="object" string="Approve" states="validate" groups="hr.group_hr_manager"/>
+                        <button name="action_validate" class="btn-primary" type="object" string="Validate" states="waiting_for_approval" groups="hr.group_hr_manager"/>
+                        <button name="action_refuse" class="btn-primary" type="object" string="Refuse" states="waiting_for_approval,validate" groups="hr.group_hr_manager"/>
+                        <button name="action_cancel" class="btn-default" type="object" string="Cancel" states="draft,waiting_for_approval,validate,refuse"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="employee_id" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="employee_code" />
+                            <field name="department_id" />
+                            <field name="job_id" />
+                            <field name="office" readonly="1"/>
+                            <field name="requested_date" readonly="1"/>
+                            <field name="handle_by" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                            <field name="notice_start_date" readonly="1"/>
+                            <field name="leave_reason" readonly="1"/>
+                            <field name="notice_end_date" readonly="1"/>
+                        </group>
+                        <group string="Equipment List">
+                            <field name="equipment_ids" nolabel="1">
+                                <tree create="false">
+                                    <field name="employee_id" readonly="1"/>
+                                    <field name="equipment_id" readonly="1"/>
+                                    <field name="type" readonly="1"/>
+                                    <field name="approved_by" readonly="1"/>
+                                    <field name="approved_date" readonly="1"/>
+                                    <field name="remark" readonly="0"/>
+                                    <field name="status" readonly="1"/>
+                                </tree>
+                                <form>
+                                    <group col="4">
+                                        <field name="employee_id" readonly="1"/>
+                                        <field name="approved_by" readonly="1"/>
+                                        <field name="equipment_id" readonly="1"/>
+                                        <field name="approved_date" readonly="1"/>
+                                        <field name="type" readonly="1"/>
+                                        <field name="status" readonly="1"/>
+                                    </group>
+                                    <group string="Remark">
+                                        <field name="remark"/>
+                                    </group>
+                                    
+                                </form>
+                            </field>
+                        </group>
+                        <group string="Document List">
+                            <field name="document_ids" nolabel="1">
+                                <tree create="false">
+                                    <field name="name"/>
+                                    <field name="employee_id"/>
+                                    <field name="submit_date"/>
+                                    <field name="remark"/>
+                                    <field name="status"/>
+                                </tree>
+                                <form>
+                                    <group col="4">
+                                        <field name="name"/>
+                                        <field name="employee_id"/>
+                                        <field name="submit_date"/>
+                                        <field name="remark"/>
+                                        <field name="status"/>  
+                                    </group>
+                                    <group string="Remark">
+                                        <field name="remark"/>
+                                    </group>
+                                    
+                                </form>
+                            </field>
+                        </group>
+                        <notebook>
+                            <page string="Extra Information" name="extra_information">
+                                <group col="4">
+                                    <field name="confirmed_by" />
+                                    <field name="confirmed_date" />
+                                    <field name="validate_by" />
+                                    <field name="validate_date" />
+                                    <field name="approved_by" />
+                                    <field name="approved_date" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Employee Clearance  Search view -->
+        
+        <record id="view_employee_clearance_process_search" model="ir.ui.view">
+            <field name="name">employee.clearance.process.search</field>
+            <field name="model">employee.clearance.process</field>
+            <field name="arch" type="xml">
+                <search string="Employee Clearance  Search">
+                    <field name="employee_id"/>
+                    <field name="employee_code"/>
+                    <group expand="0" string="Group By">
+                        <filter string="State" domain="" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        
+        <record model="ir.actions.act_window" id="action_employee_clearance_process"> 
+            <field name="name">Employee Clearance Process</field> 
+            <field name="res_model">employee.clearance.process</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_employee_clearance_process_search"/>
+            <field name="view_id" ref="view_employee_clearance_process_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add new Employee Clearance Process.
+              </p>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Employee Clearance" id="menu_employee_clearance_process" parent="menu_employee_leaving_process" 
+            action="action_employee_clearance_process" sequence="10" groups="base.group_user"/>
+    </data>
+</odoo>

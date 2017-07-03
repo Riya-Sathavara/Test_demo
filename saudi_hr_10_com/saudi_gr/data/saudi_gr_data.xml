@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="mt_visa_request_confirmed" model="mail.message.subtype">
+            <field name="name">Submitted</field>
+            <field name="res_model">visa.request</field>
+            <field name="relation_field">state</field>
+            <field name="description">Visa Request submitted, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        <record id="mt_visa_request_validated" model="mail.message.subtype">
+            <field name="name">Validated</field>
+            <field name="res_model">visa.request</field>
+            <field name="relation_field">state</field>
+            <field name="description">Visa Request Validated, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        <record id="mt_visa_request_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">visa.request</field>
+            <field name="relation_field">state</field>
+            <field name="description">Visa Request Approved</field>
+            <field name="default" eval="True"/>
+        </record>
+        
+        <record id="mt_visa_request_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">visa.request</field>
+            <field name="description">Visa Request submitted, refuse</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <record id="mt_visa_request_canceled" model="mail.message.subtype">
+            <field name="name">Canceled</field>
+            <field name="res_model">visa.request</field>
+            <field name="description">Visa Request submitted, cancel</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <!-- visa.Iqama -->
+        <record id="mt_visa_iqama_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">visa.iqama</field>
+            <field name="description">Visa Iqama submitted, waiting for approval</field>
+            <field name="default" eval="True"/>
+        </record> 
+
+        <record id="mt_visa_iqama_validated" model="mail.message.subtype">
+            <field name="name">Validated</field>
+            <field name="res_model">visa.iqama</field>
+            <field name="description">Visa Iqama submitted, validated</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_visa_iqama_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">visa.iqama</field>
+            <field name="description">Visa Iqama submitted, approved</field>
+            <field name="default" eval="True"/>
+        </record>    
+
+        <record id="mt_visa_iqama_canceled" model="mail.message.subtype">
+            <field name="name">Canceled</field>
+            <field name="res_model">visa.iqama</field>
+            <field name="description">Visa Iqama submitted, Canceled</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_visa_iqama_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">visa.iqama</field>
+            <field name="description">Visa Iqama submitted, Refused</field>
+            <field name="default" eval="True"/>
+        </record> 
+        
+<!--         sponsorship.transfer -->
+
+        <record id="mt_sponsorship_transfer_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">sponsorship.transfer</field>
+            <field name="description">Sponsorship Transfer submitted, waiting for approval</field>
+            <field name="default" eval="True"/>
+        </record> 
+
+        <record id="mt_sponsorship_transfer_validated" model="mail.message.subtype">
+            <field name="name">Validated</field>
+            <field name="res_model">sponsorship.transfer</field>
+            <field name="description">Sponsorship Transfer submitted, validated</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_sponsorship_transfer_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">visa.iqama</field>
+            <field name="description">Visa Iqama submitted, approved</field>
+            <field name="default" eval="True"/>
+        </record>    
+
+        <record id="mt_visa_iqama_canceled" model="mail.message.subtype">
+            <field name="name">Canceled</field>
+            <field name="res_model">sponsorship.transfer</field>
+            <field name="description">Sponsorship Transfer submitted, Canceled</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_sponsorship_transfer_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">sponsorship.transfer</field>
+            <field name="description">Sponsorship Transfer submitted, Refused</field>
+            <field name="default" eval="True"/>
+        </record> 
+        
+<!--         other.operation -->
+
+        <record id="mt_other_operation_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">other.operation</field>
+            <field name="description">Other Operation submitted, waiting for approval</field>
+            <field name="default" eval="True"/>
+        </record> 
+
+        <record id="mt_other_operation_validated" model="mail.message.subtype">
+            <field name="name">Validated</field>
+            <field name="res_model">other.operation</field>
+            <field name="description">Other Operation submitted, validated</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_other_operation_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">other.operation</field>
+            <field name="description">Other Operation submitted, approved</field>
+            <field name="default" eval="True"/>
+        </record>    
+
+        <record id="mt_other_operation_canceled" model="mail.message.subtype">
+            <field name="name">Canceled</field>
+            <field name="res_model">other.operation</field>
+            <field name="description">Other Operation submitted, Canceled</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_other_operation_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">other.operation</field>
+            <field name="description">Other Operation submitted, Refused</field>
+            <field name="default" eval="True"/>
+        </record> 
+        
+<!--        employee.gosi -->
+
+        <record id="mt_employee_gosi_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">employee.gosi</field>
+            <field name="description">Employee Gosi submitted, waiting for approval</field>
+            <field name="default" eval="True"/>
+        </record> 
+
+        <record id="mt_employee_gosi_validated" model="mail.message.subtype">
+            <field name="name">Validated</field>
+            <field name="res_model">employee.gosi</field>
+            <field name="description">Employee Gosi submitted, validated</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_employee_gosi_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">employee.gosi</field>
+            <field name="description">Employee Gosi submitted, approved</field>
+            <field name="default" eval="True"/>
+        </record>    
+
+        <record id="mt_employee_gosi_canceled" model="mail.message.subtype">
+            <field name="name">Canceled</field>
+            <field name="res_model">employee.gosi</field>
+            <field name="description">Employee Gosi submitted, Canceled</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_employee_gosi_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.gosi</field>
+            <field name="description">Employee Gosi submitted, Refused</field>
+            <field name="default" eval="True"/>
+        </record> 
+    </data>
+</odoo>

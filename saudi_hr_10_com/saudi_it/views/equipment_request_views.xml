@@ -1,0 +1,175 @@
+<odoo>
+    <data>
+    <!-- Visa Request List view -->
+
+        <record model="ir.ui.view" id="view_equipment_request_tree">
+            <field name="name">equipment.request.tree</field>
+            <field name="model">equipment.request</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment Request List" decoration-bf="message_needaction==True">
+                    <field name="type" string="Request for"/>
+                    <field name="employee_id" />
+                    <field name="job_id" />
+                    <field name="department_id" />
+                    <field name="create_date" />
+                    <field name="state" />
+                    <field name="message_needaction_counter" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Equipment Request Form view -->
+        
+        <record model="ir.ui.view" id="view_equipment_request_form">
+            <field name="name">equipment.request.form</field>
+            <field name="model">equipment.request</field>
+            <field name="arch" type="xml">
+                <form string="Equipment Request Form">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" class="btn-primary" type="object" string="Confirm" states="draft" />
+                        <button name="action_approve" class="btn-primary" type="object" string="Approve" states="validate" groups="saudi_it.group_saudi_it_operation_manager" />
+                        <button name="action_validate" class="btn-primary" type="object" string="Validate" states="waiting_for_approval" groups="saudi_it.group_saudi_it_operation_manager" />
+                        <button name="action_refuse" class="btn-primary" type="object" string="Refuse" states="waiting_for_approval,validate" groups="saudi_it.group_saudi_it_operation_manager"/>
+                        <button name="action_cancel" class="btn-default" type="object" string="Cancel" states="draft,waiting_for_approval,validate,refuse" />
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"/>
+                    </header>
+                    <sheet>
+                        <group string="Employee Information" col="4">
+                                <field name="employee_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="employee_code" />
+                                <field name="job_id" />
+                                <field name="department_id" />
+                                <field name="company_id" widget="selection" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                        </group>
+            
+                        <group string="Type Of Request">
+                            <group>
+                                <field name="type" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="equipment_id" options="{'no_create': True, 'no_open': True}" domain="[('type','=',type)]" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Description" name="description">
+                                <field name="description" placeholder="Add Description.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </page>
+                            <page string="Extra Information" name="extra_information">
+                                <group col="4">
+                                    <field name="confirmed_by" />
+                                    <field name="confirmed_date" />
+                                    <field name="approved_by" />
+                                    <field name="approved_date" />
+                                    <field name="validate_by" />
+                                    <field name="validate_date" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Visa Request Search view -->
+        
+        <record id="view_equipment_request_search" model="ir.ui.view">
+            <field name="name">equipment.request.search</field>
+            <field name="model">equipment.request</field>
+            <field name="arch" type="xml">
+                <search string="Equipment Request Search">
+                    <field name="employee_id"/>
+                    <field name="employee_code"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Type" domain="" context="{'group_by':'type'}"/>
+                        <filter string="State" domain="" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        
+         <!-- actions opening views on models -->
+        
+        <record model="ir.actions.act_window" id="action_equipment_request"> 
+            <field name="name">Equipment Request</field> 
+            <field name="res_model">equipment.request</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_equipment_request_search"/>
+            <field name="view_id" ref="view_equipment_request_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add new Equipment Request.
+              </p>
+            </field>
+        </record>
+        
+        <!-- Added type in equipment form view -->
+        <record id="view_hr_equipment_view_form_saudi_it" model="ir.ui.view">
+            <field name="name">maintenance.equipment.form</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+            <field name="arch" type="xml">
+                <field name="category_id" position="before">
+                    <field name="type"/>
+                </field>
+            </field>
+        </record>
+        
+        <!-- Added type in equipment kanban view -->
+        <record id="view_hr_equipment_view_kanban_saudi_it" model="ir.ui.view">
+            <field name="name">maintenance.equipment.kanban</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr='//div[@class="oe_kanban_content"]/div[@class="mt4"]' position='inside'>
+                    <div>
+                        <field name="type"/><br/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Added type in equipment tree view -->
+        <record id="view_hr_equipment_view_tree_saudi_it" model="ir.ui.view">
+            <field name="name">maintenance.equipment.tree</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="serial_no" position="after">
+                    <field name="type"/>
+                </field>
+            </field>
+        </record>
+        
+        <!-- Improve search view for equipmenmt.-->
+        <record id="view_hr_equipment_view_search_saudi_it" model="ir.ui.view">
+            <field name="name">maintenance.equipment.search</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_search"/>
+            <field name="arch" type="xml">
+                <field name="category_id" position="after">
+                    <field name="type"/>
+                </field>
+                <xpath expr="/search/group" position="inside">
+                    <filter string='Type' domain="[]" context="{'group_by': 'type'}"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- menu categories -->
+        <menuitem name="IT Operation" id="saudi_it.menu_it_operation" parent="hr.menu_hr_root" sequence="20" groups="saudi_it.group_saudi_it_operation_user"/> 
+        <!-- Equipment Request actions -->
+        <menuitem name="Equipment Request" id="saudi_it.menu_gr_equipment_request" parent="saudi_it.menu_it_operation" groups="saudi_it.group_saudi_it_operation_user"
+            action="saudi_it.action_equipment_request" sequence="5"/>
+            
+        <!-- IT Configuration Menu -->
+        <menuitem name="IT Equipment" id="saudi_it.menu_equipment" parent="saudi_base.menu_base_hr_configuration" groups="saudi_it.group_saudi_it_operation_manager"
+            action="maintenance.hr_equipment_action" sequence="20"/>
+    </data>
+</odoo>

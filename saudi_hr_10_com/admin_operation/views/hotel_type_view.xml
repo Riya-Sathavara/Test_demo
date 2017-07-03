@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <!-- hotel.type tree view -->
+        <record model="ir.ui.view" id="view_hotel_type_tree">
+            <field name="name">hotel.type.tree</field>
+            <field name="model">hotel.type</field>
+            <field name="arch" type="xml">
+                <tree string="Hotel Type">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Visa Hotel Type Form view -->
+        <record model="ir.ui.view" id="view_hotel_type_form">
+            <field name="name">hotel_type.form</field>
+            <field name="model">hotel.type</field>
+            <field name="arch" type="xml">
+                <form string="Hotel Form">
+                    <sheet>
+                        <group>
+                            <group string="Hotel Types Details">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+                
+            </field>
+        </record>
+        
+        <!-- actions  Hotel Type opening views on models -->
+        <record model="ir.actions.act_window" id="action_hotel_type_action"> 
+            <field name="name">Hotel Type</field> 
+            <field name="res_model">hotel.type</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_hotel_type_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add New Hotel Type.
+              </p>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Hotel Type" id="admin_operation.main_hotel_type" parent="admin_operation.taveling_operations" action="action_hotel_type_action" sequence="20"/> 
+    </data>
+</odoo>

@@ -1,0 +1,213 @@
+<odoo>
+    <data>
+        <!-- Visa Iqama List view -->
+
+        <record model="ir.ui.view" id="view_visa_iqama_tree">
+            <field name="name">visa.iqama.tree</field>
+            <field name="model">visa.iqama</field>
+            <field name="arch" type="xml">
+                <tree string="Visa Iqama List" decoration-bf="message_needaction==True">
+                    <field name="employee_id" />
+                    <field name="employee_code" />
+                    <field name="iqama_type" />
+                    <field name="state" />
+                    <field name="message_needaction_counter" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Visa Iqama Form view -->
+
+        <record model="ir.ui.view" id="view_visa_iqama_form">
+            <field name="name">visa.iqama.form</field>
+            <field name="model">visa.iqama</field>
+            <field name="arch" type="xml">
+                <form string="Visa Iqama Form">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" class="btn-primary" type="object" string="Confirm" states="draft"/>
+                        <button name="action_approve" class="btn-primary" type="object" string="Approve" states="validate" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_validate" class="btn-primary" type="object" string="Validate" states="waiting_for_approval" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_refuse" class="btn-primary" type="object" string="Refuse" states="waiting_for_approval,validate" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_cancel" class="btn-default" type="object" string="Cancel" states="draft,waiting_for_approval,validate,refuse"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"/>
+                    </header>
+                    <sheet>
+                        <group string="Employee Details">
+                            <group>
+                                <field name="employee_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="employee_code" />
+                                <field name="department_id" />
+                                <field name="job_id" />
+                                <field name="office" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </group>
+                            <group>
+                                <field name="name" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="arabic_name" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="country_id" widget="selection" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="religion_id" widget="selection" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="birth_date" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="profession" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Iqama Details">
+                            <group col="2">
+                                <field name="iqama_number" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="serial_number" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="iqama_position" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="issue_place" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="issue_date" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="expiry_date" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="expiry_date_hijri" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description" name="description">
+                                <field name="description" widget="html" placeholder="Add Description.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </page>
+                            <page string="Required Document" name="required_document">
+                                <group colspan="2" string="New Iqama Required Document">
+                                    <field name="new_iqama" readonly="1" widget="html" nolabel="1" placeholder="Add required document list.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                   </group>
+                                   <group colspan="2" string="Family Iqama Required Document">
+                                    <field name="family_iqama" readonly="1" widget="html" nolabel="1" placeholder="Add required document list.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                   </group>
+                                   <group colspan="2" string="New born baby Iqama(in KSA)">
+                                    <field name="new_baby_born_ksa_iqama" readonly="1" widget="html" nolabel="1" placeholder="Add required document list.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                   </group>
+                                   <group colspan="2" string="New born baby Iqama (outside KSA)">
+                                    <field name="new_baby_born_outside_ksa_iqama" readonly="1" widget="html" nolabel="1" placeholder="Add required document list.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                   </group>
+                                   
+                            </page>
+                            <page string="Extra Information" name="extra_information">
+                                <group col="4">
+                                    <field name="confirmed_by" />
+                                    <field name="confirmed_date" />
+                                    <field name="validate_by" />
+                                    <field name="validate_date" />
+                                    <field name="approved_by" />
+                                    <field name="approved_date" />
+
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+                
+            </field>
+        </record>
+        
+        <!-- Visa Iqama Search view -->
+        
+        <record id="view_visa_iqama_search" model="ir.ui.view">
+            <field name="name">visa.iqama.search</field>
+            <field name="model">visa.iqama</field>
+            <field name="arch" type="xml">
+                <search string="Visa Iqama Search">
+                    <field name="employee_id"/>
+                    <field name="employee_code"/>
+                    <field name="iqama_type"/>
+                    <field name="state"/>
+                    <field name="arabic_name"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Iqama Type" domain="" context="{'group_by':'iqama_type'}"/>
+                        <filter string="Country" domain="" context="{'group_by':'country_id'}"/>
+                        <filter string="State" domain="" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        
+        <record model="ir.actions.act_window" id="action_visa_iqama_action"> 
+            <field name="name">Iqama</field> 
+            <field name="res_model">visa.iqama</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_visa_iqama_search"/>
+            <field name="view_id" ref="view_visa_iqama_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add New Iqama.
+              </p>
+            </field>
+        </record>
+        
+        <!-- Religion Tree view -->
+        <record model="ir.ui.view" id="view_religion_religion_tree">
+            <field name="name">ReligionReligion.tree</field>
+            <field name="model">religion.religion</field>
+            <field name="arch" type="xml">
+                <tree string="Religion List">
+                    <field name="name" />
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Religion Form view -->
+        <record model="ir.ui.view" id="view_religion_religion_form">
+            <field name="name">religion.religion.form</field>
+            <field name="model">religion.religion</field>
+            <field name="arch" type="xml">
+                <form string="Religion Form">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1" widget="html"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <!-- actions opening views on Religion -->
+        
+        <record model="ir.actions.act_window" id="action_religion_religion_action"> 
+            <field name="name">Religion</field> 
+            <field name="res_model">religion.religion</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_religion_religion_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add New Religion.
+              </p>
+            </field>
+        </record>
+        
+        <!-- remove readonly for manager-->
+        <record model="ir.ui.view"  id="view_visa_iqama_form_readonly_group_form">
+            <field name="name">visa.iqama.readonly</field>
+            <field name="model">visa.iqama</field>
+            <field name="inherit_id" ref="saudi_gr.view_visa_iqama_form"/>
+            <field name="groups_id" eval="[(6, 0, [ref('saudi_gr.group_saudi_gr_operation_manager') ])]"/>
+            <field name="arch" type="xml">
+                <field name="new_iqama" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name="family_iqama" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name="new_baby_born_ksa_iqama" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name="new_baby_born_outside_ksa_iqama" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Iqama" string="Iqama" id="saudi_gr.menu_action_visa_iqama" parent="saudi_gr.menu_gr_operation" 
+            action="saudi_gr.action_visa_iqama_action" sequence="10" groups="saudi_gr.group_saudi_gr_operation_user"/>
+    </data>
+</odoo>

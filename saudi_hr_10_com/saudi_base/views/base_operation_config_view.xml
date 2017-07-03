@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <menuitem name="Configuration (KSA)" id="menu_base_hr_configuration" parent="hr.menu_hr_root" sequence="100"/> 
+        <menuitem action="hr.open_module_tree_department" id="hr.menu_hr_department_tree" parent="hr.menu_hr_root" sequence="90"
+            groups="hr.group_hr_manager"/>
+	</data>
+</odoo>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+	
+	<!--     employee.leaving.process -->
+	    <record id="mt_employee_leaving_process_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">employee.leaving.process</field>
+            <field name="description">Employee Leaving Process submitted, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        
+        <record id="mt_employee_leaving_process_validate" model="mail.message.subtype">
+            <field name="name">Validate</field>
+            <field name="res_model">employee.leaving.process</field>
+            <field name="description">Employee Leaving Process submitted, validate</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_employee_leaving_process_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">employee.leaving.process</field>
+            <field name="description">Employee Leaving Process submitted, approve</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_employee_leaving_process_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.leaving.process</field>
+            <field name="description">Employee Leaving Process submitted, refuse</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <record id="mt_employee_leaving_process_canceled" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.leaving.process</field>
+            <field name="description">Employee Leaving Process submitted, cancel</field>
+            <field name="default" eval="True"/>
+        </record>  
+	
+		<!-- 	employee.clearance.process -->
+	    <record id="mt_employee_clearance_process_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">employee.clearance.process</field>
+            <field name="description">Employee Clearance Process submitted, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        
+        <record id="mt_employee_clearance_process_validate" model="mail.message.subtype">
+            <field name="name">Validate</field>
+            <field name="res_model">employee.clearance.process</field>
+            <field name="description">Employee Clearance Process submitted, validate</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_employee_clearance_process_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">employee.clearance.process</field>
+            <field name="description">Employee Clearance Process submitted, approve</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_employee_clearance_process_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.clearance.process</field>
+            <field name="description">Employee Clearance Process submitted, refuse</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <record id="mt_employee_clearance_process_canceled" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.clearance.process</field>
+            <field name="description">Employee Clearance Process submitted, cancel</field>
+            <field name="default" eval="True"/>
+        </record> 
+        
+		<!--        end.of.service.benefit -->
+		<record id="mt_end_of_service_benefit_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">end.of.service.benefit</field>
+            <field name="description">End Of Service Benefit submitted, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        
+        <record id="mt_end_of_service_benefit_validate" model="mail.message.subtype">
+            <field name="name">Validate</field>
+            <field name="res_model">end.of.service.benefit</field>
+            <field name="description">End Of Service Benefit submitted, validate</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_end_of_service_benefit_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">end.of.service.benefit</field>
+            <field name="description">End Of Service Benefit submitted, approve</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_end_of_service_benefit_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">end.of.service.benefit</field>
+            <field name="description">End Of Service Benefit submitted, refuse</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <record id="mt_end_of_service_benefit_canceled" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">end.of.service.benefit</field>
+            <field name="description">End Of Service Benefit submitted, cancel</field>
+            <field name="default" eval="True"/>
+        </record> 
+    </data>
+</odoo>

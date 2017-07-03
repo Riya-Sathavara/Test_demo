@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <!-- travel purpose tree view -->
+        <record model="ir.ui.view" id="view_travel_purpose_tree">
+            <field name="name">travel.purpose.tree</field>
+            <field name="model">travel.purpose</field>
+            <field name="arch" type="xml">
+                <tree string="Travel Purpose">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Visa Travel Purpose Form view -->
+        <record model="ir.ui.view" id="view_travel_purpose_form">
+            <field name="name">travel.purpose.form</field>
+            <field name="model">travel.purpose</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Travels Purpose Details">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+                
+            </field>
+        </record>
+        
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="action_travel_purpose_action"> 
+            <field name="name">Travel Purpose</field> 
+            <field name="res_model">travel.purpose</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_travel_purpose_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add New Travel Purpose.
+              </p>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Traveling Purpose" id="admin_operation.main_travel_purpose" parent="admin_operation.taveling_operations" action="action_travel_purpose_action"/> 
+    </data>
+</odoo>

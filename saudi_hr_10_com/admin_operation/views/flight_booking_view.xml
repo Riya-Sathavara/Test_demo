@@ -1,0 +1,106 @@
+<odoo>
+    <data>
+        <!-- Flight Booking tree view -->
+        <record model="ir.ui.view" id="view_flight_booking_tree">
+            <field name="name">flight.booking.tree</field>
+            <field name="model">flight.booking</field>
+            <field name="arch" type="xml">
+                <tree string="Flight Booking">
+                    <field name="employee_id" />
+                    <field name="type" />
+                    <field name="start_date" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Flight Booking Form view -->
+        <record model="ir.ui.view" id="view_flight_booking_form">
+            <field name="name">flight.booking.form</field>
+            <field name="model">flight.booking</field>
+            <field name="arch" type="xml">
+                <form string="Ticket Form">
+                  <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" class="btn-primary" type="object" string="Confirm" states="draft"/>
+                        <button name="action_approve" class="btn-primary" type="object" string="Approve" states="validate" groups="admin_operation.group_admin_operation_manager"/>
+                        <button name="action_validate" class="btn-primary" type="object" string="Validate" states="waiting_for_approval" groups="admin_operation.group_admin_operation_manager"/>
+                        <button name="action_refuse" class="btn-primary" type="object" string="Refuse" states="waiting_for_approval,validate" groups="admin_operation.group_admin_operation_manager"/>
+                        <button name="action_cancel" class="btn-default" type="object" string="Cancel" states="draft,waiting_for_approval,validate,refuse"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Ticket Type">
+                                <field name="ticket_type_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Employee Details">
+                                <field name="employee_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="employee_ems_code"/>
+                                <field name="employee_code"/>
+                                <field name="department_id"/>
+                                <field name="job_id"/>
+                                <field name="office"/>
+                            </group>
+                            <group string="Travel Details">
+                                <field name="type" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="travel_purpose_id"/>
+                                <field name="no_passenger" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="start_date" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="traveling_date_from" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="traveling_date_to" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="travel_from" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="travel_to" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description" name="description">
+                                <field name="description" placeholder="Add Description.." widget="html" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </page>
+                            <page string="Expense">
+                                <field name="hr_expense_ids" context="{'default_employee_id' : employee_id}">
+                                    <tree name="hr_expense_ids" nolable="1">
+                                        <field name="employee_id"/>
+                                        <field name="date"/>
+                                        <field name="name"/>
+                                        <field name="total_amount"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Bill/Ticket">
+                                <field name="ir_attachm_ids"/>
+                            </page>
+                         </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="action_flight_booking_action"> 
+            <field name="name">Flight Booking</field> 
+            <field name="res_model">flight.booking</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_flight_booking_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add New Flight Booking.
+              </p>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Admin Operations" id="admin_operation.main_admin_operation" parent="hr.menu_hr_root" sequence="20"/> 
+        <menuitem name="Flight Booking" id="admin_operation.main_flight_booking" parent="admin_operation.main_admin_operation" 
+        action="action_flight_booking_action"/> 
+        
+    </data>
+</odoo>

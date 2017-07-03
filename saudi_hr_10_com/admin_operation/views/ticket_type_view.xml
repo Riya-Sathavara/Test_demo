@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <!-- Ticket.type tree view -->
+        <record model="ir.ui.view" id="view_ticket_type_tree">
+            <field name="name">ticket.type.tree</field>
+            <field name="model">ticket.type</field>
+            <field name="arch" type="xml">
+                <tree string="Ticket Type">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Visa Ticket Type Form view -->
+        <record model="ir.ui.view" id="view_ticket_type_form">
+            <field name="name">ticket.type.form</field>
+            <field name="model">ticket.type</field>
+            <field name="arch" type="xml">
+                <form string="Ticket Form">
+                    <sheet>
+                        <group>
+                            <group string="Ticket Details">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+                
+            </field>
+        </record>
+        
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="action_ticket_type_action"> 
+            <field name="name">Ticket Type</field> 
+            <field name="res_model">ticket.type</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_ticket_type_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add New Ticket Type.
+              </p>
+            </field>
+        </record>
+
+        <!-- main menu in hr configuration -->
+        <menuitem name="Traveling Operations" id="admin_operation.taveling_operations" parent="saudi_base.menu_base_hr_configuration" sequence="20" groups="admin_operation.group_admin_operation_manager"/> 
+        <!-- actions -->
+        <menuitem name="Traveling Ticket Type" id="admin_operation.main_ticket_type" parent="admin_operation.taveling_operations" action="action_ticket_type_action" sequence="20"/> 
+    </data>
+</odoo>

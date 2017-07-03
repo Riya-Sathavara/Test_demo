@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="hr_holiday_maternity_leave" model="hr.holidays.status">
+            <field name="name">Maternity leave</field>
+            <field name="color_name">blue</field>
+            <field name="limit" eval="True"/>
+            <field name="context">{'parent.employee_id.gender', '=', Female}</field>
+        </record>
+        
+        <record id="hr_holiday_marriage_and_bereavement_leave" model="hr.holidays.status">
+            <field name="name">Marriage and bereavement leave</field>
+            <field name="color_name">blue</field>
+            <field name="limit" eval="True"/>
+        </record>
+        
+        <record id="hr_holiday_paternity_leave" model="hr.holidays.status">
+            <field name="name">Paternity leave</field>
+            <field name="color_name">red</field>
+            <field name="limit" eval="True"/>
+        </record>
+
+        <record id="hr_holiday_halfday" model="hr.holidays.status">
+            <field name="name">HDL</field>
+            <field name="color_name">blue</field>
+            <field name="limit" eval="True"/>
+        </record>
+        
+        <record id="hr_holiday_late" model="hr.holidays.status">
+            <field name="name">LATE</field>
+            <field name="color_name">blue</field>
+            <field name="limit" eval="True"/>
+        </record>
+        
+        <record id="hr_holiday_early" model="hr.holidays.status">
+            <field name="name">ERLY</field>
+            <field name="color_name">blue</field>
+            <field name="limit" eval="True"/>
+        </record>
+        
+        <record id="hr_holiday_absence" model="hr.holidays.status">
+            <field name="name">ABS</field>
+            <field name="color_name">red</field>
+            <field name="limit" eval="True"/>
+        </record>
+       <!-- Salary Structure for saudi-->
+
+        <record id="hr_rule_house_allow" model="hr.salary.rule">
+            <field name="name">Housing Allowance</field>
+            <field name="sequence" eval="7"/>
+            <field name="code">HA</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage * 0.25</field>
+        </record>
+        
+        <!-- GOSI Company Contribution -->
+        <record id="hr_rule_gosi_company" model="hr.salary.rule">
+            <field name="name">GOSI Company Contribution</field>
+            <field name="sequence" eval="8"/>
+            <field name="code">GC</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage + HA) * 0.09</field>
+        </record>
+        
+        <!-- GOSI Employee Contribution -->
+        <record id="hr_rule_gosi_employee" model="hr.salary.rule">
+            <field name="name">GOSI Employee Share</field>
+            <field name="sequence" eval="9"/>
+            <field name="code">GE</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage + HA) * 0.09</field>
+        </record>
+        
+        <!-- Sanid Company Share -->
+        <record id="hr_rule_sanid_company" model="hr.salary.rule">
+            <field name="name">Sanid GOSI Contribution</field>
+            <field name="sequence" eval="11"/>
+            <field name="code">SG</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage + HA) * 0.01</field>
+        </record>
+        
+       <!-- Sanid Employee Share -->
+       <record id="hr_rule_sanid_employee" model="hr.salary.rule">
+            <field name="name">Sanid GOSI Deductions</field>
+            <field name="sequence" eval="12"/>
+            <field name="code">SGD</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage + HA) * 0.01</field>
+        </record>
+        
+        <!-- Occupational Hazard GOSI Company Share -->
+        <record id="hr_rule_occ_hazard_company" model="hr.salary.rule">
+            <field name="name">Occupational Hazard GOSI </field>
+            <field name="sequence" eval="10"/>
+            <field name="code">OHG</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage + HA) * 0.02</field>
+        </record>
+        
+        <!-- Unpaid leave deduction-->
+        <record id="hr_salary_rule_upl" model="hr.salary.rule">
+            <field name="code">UPL</field>
+            <field name="name">Unpaid leave deduction</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=bool(worked_days.Unpaid)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=-(BASIC/30)*(worked_days.Unpaid.number_of_days)</field>
+            <field name="sequence" eval="110"/>
+            <field name="note">Deduction of unpaid leaves from basic salary - depends on the Unpaid leaves approved</field>
+        </record>
+        
+        <!-- Half Day leave deduction< -->
+        <record id="hr_salary_rule_hdl" model="hr.salary.rule">
+            <field name="code">HDL</field>
+            <field name="name">Half Day leave deduction</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=bool(worked_days.HDL)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=-(BASIC/30)*(worked_days.HDL.number_of_days)*0.5</field>
+            <field name="sequence" eval="111"/>
+            <field name="note">Deduction of Half Day leaves from basic salary  - depends on the HDL leaves approved</field>
+        </record>   
+        
+        <!-- Half Day leave deduction-->
+        <record id="hr_salary_rule_abs" model="hr.salary.rule">
+            <field name="code">ABS</field>
+            <field name="name">Absence deduction</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=bool(worked_days.ABS)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=-(BASIC/30)*(worked_days.ABS.number_of_days)*2</field>
+            <field name="sequence" eval="112"/>
+            <field name="note">Deduction of absence day * 2 days of basic salary - depends on the ABS leaves</field>
+        </record>
+        
+        <!-- Lateness deduction-->
+        <record id="hr_salary_rule_late" model="hr.salary.rule">
+            <field name="code">LATE</field>
+            <field name="name">Lateness deduction</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=bool(worked_days.LATE)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=(worked_days.LATE.number_of_days > 2 and -(BASIC/30)*(worked_days.LATE.number_of_days)*0.25 or 0) </field>
+            <field name="sequence" eval="113"/>
+            <field name="note">If the employee came 3 + times late, deduct each latenes by 1/4 basic day,
+            otherwise no deduction but show on the payslip with zero amount.
+            Depends on the LATE leaves</field>
+        </record>   
+        
+        <!-- Early leave deduction-->
+        <record id="hr_salary_rule_early" model="hr.salary.rule">
+            <field name="code">ERLY</field>
+            <field name="name">Early leave deduction</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=bool(worked_days.ERLY)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=-(BASIC/30)*(worked_days.ERLY.number_of_days)*0.25 </field>
+            <field name="sequence" eval="114"/>
+            <field name="note">If the employee left early, deduct each leave by 1/4 basic day,
+            otherwise do not show on the payslip.
+            Depends on the ERLY leaves</field>
+        </record>   
+        
+        <!--End Of Service Benefit Allowance-->
+        <record id="hr_salary_rule_eos" model="hr.salary.rule">
+            <field name="code">EOS</field>
+            <field name="name">End Of Service Benefit</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">0 </field>
+            <field name="sequence" eval="15"/>
+            <field name="note"></field>
+        </record>   
+        
+        <!-- Salary Structure based on Saudi Payroll -->
+        <record id="structure_saudi" model="hr.payroll.structure">
+            <field name="code">SAUDI</field>
+            <field name="name">Saudi Payslip Structure</field>
+            <field eval="[(6, 0, [ref('hr_payroll.hr_rule_basic'), 
+                    ref('hr_payroll.hr_rule_taxable'),
+                    ref('hr_payroll.hr_rule_net'), 
+                    ref('hr_rule_gosi_company'),
+                    ref('hr_rule_gosi_employee'), 
+                    ref('hr_rule_house_allow'),
+                    ref('hr_rule_sanid_company'), 
+                    ref('hr_rule_sanid_employee'),
+                    ref('hr_rule_occ_hazard_company'),
+                    ref('hr_salary_rule_upl'),
+                    ref('hr_salary_rule_hdl'),
+                    ref('hr_salary_rule_abs'),
+                    ref('hr_salary_rule_late'),
+                    ref('hr_salary_rule_early'),])]" name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="parent_id" ref="hr_payroll.structure_base"/>
+        </record>
+        
+        <!-- Change in net calculation -->
+        <record id="hr_payroll.hr_rule_net" model="hr.salary.rule">
+            <field name="name">Net</field>
+            <field name="sequence" eval="200"/>
+            <field name="code">NET</field>
+            <field name="category_id" ref="hr_payroll.NET"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.BASIC + categories.ALW - categories.DED</field>
+            <field name="register_id" ref="hr_payroll.contrib_register_employees"/>
+        </record>
+    </data>
+</odoo>

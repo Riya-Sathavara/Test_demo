@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    
+       <!--     equipment.request -->
+       <record id="mt_equipment_request_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">equipment.request</field>
+            <field name="description">Equipment Request submitted, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        
+        <record id="mt_equipment_request_validate" model="mail.message.subtype">
+            <field name="name">Validate</field>
+            <field name="res_model">equipment.request</field>
+            <field name="description">Equipment Request submitted, validate</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_equipment_request_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">equipment.request</field>
+            <field name="description">Equipment Request submitted, approve</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_equipment_request_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">equipment.request</field>
+            <field name="description">Equipment Request submitted, refuse</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <record id="mt_equipment_request_canceled" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">equipment.request</field>
+            <field name="description">Equipment Request submitted, cancel</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+       <!--     employee.registration -->
+       <record id="mt_employee_registration_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">employee.registration</field>
+            <field name="description">Employee Registration submitted, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        
+        <record id="mt_employee_registration_validate" model="mail.message.subtype">
+            <field name="name">Validate</field>
+            <field name="res_model">employee.registration</field>
+            <field name="description">Employee Registration submitted, validate</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_employee_registration_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">employee.registration</field>
+            <field name="description">Employee Registration submitted, approve</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_employee_registration_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.registration</field>
+            <field name="description">Employee Registration submitted, refuse</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <record id="mt_employee_registration_canceled" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.registration</field>
+            <field name="description">Employee Registration submitted, cancel</field>
+            <field name="default" eval="True"/>
+        </record> 
+
+       <!--     employee.deregistration -->
+       <record id="mt_employee_deregistration_waiting_for_approved" model="mail.message.subtype">
+            <field name="name">Waiting For Approved</field>
+            <field name="res_model">employee.deregistration</field>
+            <field name="description">Employee Deregistration submitted, waiting approval</field>
+            <field name="default" eval="True"/>
+        </record>
+        
+        <record id="mt_employee_deregistration_validate" model="mail.message.subtype">
+            <field name="name">Validate</field>
+            <field name="res_model">employee.deregistration</field>
+            <field name="description">Employee Deregistration submitted, validate</field>
+            <field name="default" eval="True"/>
+        </record>
+
+        <record id="mt_employee_deregistration_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">employee.deregistration</field>
+            <field name="description">Employee Deregistration submitted, approve</field>
+            <field name="default" eval="True"/>
+        </record>   
+
+        <record id="mt_employee_deregistration_refused" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.deregistration</field>
+            <field name="description">Employee Deregistration submitted, refuse</field>
+            <field name="default" eval="True"/>
+        </record>     
+
+        <record id="mt_employee_deregistration_canceled" model="mail.message.subtype">
+            <field name="name">Refused</field>
+            <field name="res_model">employee.deregistration</field>
+            <field name="description">Employee Deregistration submitted, cancel</field>
+            <field name="default" eval="True"/>
+        </record>   
+   </data>
+</odoo>

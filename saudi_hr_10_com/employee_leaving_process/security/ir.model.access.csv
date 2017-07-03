@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_leaving_process_user,employee.leaving.process.user,model_employee_leaving_process,base.group_user,1,1,1,0
+access_employee_clearance_process_user,employee.clearance.process.user,model_employee_clearance_process,base.group_user,1,1,0,0
+access_end_of_service_benefit_user,end.of.service.benefit.user,model_end_of_service_benefit,base.group_user,1,1,0,0
+access_hr_payslip_user,hr.payslip.user,hr_payroll.model_hr_payslip,base.group_user,1,1,0,0
+access_hr_payslip_line_user,hr.payslip.line.user,hr_payroll.model_hr_payslip_line,base.group_user,1,1,0,0
+
+,,,,,,,
+access_employee_leaving_process_manager,employee.leaving.process.it.manager,model_employee_leaving_process,hr.group_hr_manager,1,1,1,1
+access_employee_clearance_process_manager,employee.clearance.process.manager,model_employee_clearance_process,hr.group_hr_manager,1,1,1,1
+access_end_of_service_benefit_manager,end.of.service.benefit.manager,model_end_of_service_benefit,hr.group_hr_manager,1,1,1,1

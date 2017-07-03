@@ -1,0 +1,129 @@
+<odoo>
+    <data>
+        <!-- End of Service Benefit List view -->
+
+        <record model="ir.ui.view" id="view_end_of_service_benefit_tree">
+            <field name="name">end.of.service.benefit.tree</field>
+            <field name="model">end.of.service.benefit</field>
+            <field name="arch" type="xml">
+                <tree string="End of Service Benefit List" decoration-bf="message_needaction==True">
+                    <field name="employee_id" />
+                    <field name="employee_code" />
+                    <field name="eos" />
+                    <field name="state" />
+                    <field name="message_needaction_counter" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- End of Service Benefit Form view -->
+
+        <record model="ir.ui.view" id="view_end_of_service_benefit_form">
+            <field name="name">end.of.service.benefit.form</field>
+            <field name="model">end.of.service.benefit</field>
+            <field name="arch" type="xml">
+                <form string="End of Service Benefit Form">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" class="btn-primary" type="object" string="Confirm" states="draft"/>
+                        <button name="action_approve" class="btn-primary" type="object" string="Approve" states="validate" groups="hr.group_hr_manager"/>
+                        <button name="action_validate" class="btn-primary" type="object" string="Validate" states="waiting_for_approval" groups="hr.group_hr_manager"/>
+                        <button name="action_refuse" class="btn-primary" type="object" string="Refuse" states="waiting_for_approval,validate" groups="hr.group_hr_manager"/>
+                        <button name="action_cancel" class="btn-default" type="object" string="Cancel" states="draft,waiting_for_approval,validate,refuse"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="employee_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                            <field name="employee_code" />
+                            <field name="department_id" />
+                            <field name="job_id" />
+                            <field name="date_of_joining" />
+                            <field name="eos" readonly="1" attrs="{'invisible': [('exp_year', '&lt;', 2)]}"/>
+                            <label for="exp_year"/>
+                            <div class="oe_inline" name="experience">
+                                <field class="oe_inline" name="exp_year"/>
+                                <label for="space"/> Years 
+                                <field class="oe_inline" name="exp_month" nolabel="1"/> Months
+                            </div>
+                            
+                        </group>
+                        <group string="Payslip List">
+                            <field name="payslip_ids" nolabel="1">
+                                <tree create="false">
+                                    <field name="name" readonly="1"/>
+                                    <field name="number" readonly="1"/>
+                                    <field name="date_from" readonly="1"/>
+                                    <field name="date_to" readonly="1"/>
+                                    <field name="lines_total" readonly="1" sum="total"/>
+                                    <field name="state" readonly="1"/>
+                                </tree>
+                                <form>
+                                    <group col="4">
+                                        <field name="name" readonly="1"/>
+                                        <field name="number" readonly="1"/>
+                                        <field name="date_from" readonly="1"/>
+                                        <field name="date_to" readonly="1"/>
+                                        <field name="contract_id" readonly="1"/>
+                                        <field name="state" readonly="1"/>
+                                    </group>
+                                    <group string="Payslip Lines">
+                                        <field name="line_ids" nolabel="1" readonly="1">
+                                            <tree create="false">
+                                                <field name="salary_rule_id" readonly="1"/>
+                                                <field name="amount" readonly="1"/>
+                                                <field name="quantity" readonly="1"/>
+                                                <field name="total"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- End of Service Benefit Search view -->
+        
+        <record id="view_end_of_service_benefit_search" model="ir.ui.view">
+            <field name="name">end.of.service.benefit.search</field>
+            <field name="model">end.of.service.benefit</field>
+            <field name="arch" type="xml">
+                <search string="End of Service Benefit Search">
+                    <field name="employee_id"/>
+                    <field name="employee_code"/>
+                    <group expand="0" string="Group By">
+                        <filter string="State" domain="" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        
+        <record model="ir.actions.act_window" id="action_end_of_service_benefit"> 
+            <field name="name">End of Service Benefit</field> 
+            <field name="res_model">end.of.service.benefit</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_end_of_service_benefit_search"/>
+            <field name="view_id" ref="view_end_of_service_benefit_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add new End of Service Benefit.
+              </p>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="EOS" id="menu_end_of_service_benefit" parent="menu_employee_leaving_process" 
+            action="action_end_of_service_benefit" sequence="15" groups="base.group_user"/>
+    </data>
+</odoo>

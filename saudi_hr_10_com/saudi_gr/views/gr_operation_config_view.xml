@@ -1,0 +1,100 @@
+<odoo>
+    <data>
+       <!-- GR Operation Required Document Tree View-->
+        <record model="ir.ui.view" id="view_gr_operation_required_document_tree">
+            <field name="name">gr.operation.required.document.tree</field>
+            <field name="model">gr.operation.required.document</field>
+            <field name="arch" type="xml">
+                <tree string="Visa Request List">
+                     <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- GR Operation Required Document Form View-->
+        <record model="ir.ui.view" id="view_gr_operation_required_document_form">
+            <field name="name">gr.operation.required.document.form</field>
+            <field name="model">gr.operation.required.document</field>
+            <field name="arch" type="xml">
+                <form string="GR Operation">
+                    <group><field name="company_id"/></group>
+                    <group string="Required Documents">
+                            <field name="visa_request" widget="html"/>
+                            <field name="new_iqama" widget="html"/>
+                            <field name="family_iqama" widget="html"/>
+                            <field name="new_baby_born_ksa_iqama" widget="html"/>
+                            <field name="new_baby_born_outside_ksa_iqama" widget="html"/>
+                            <field name="sponsorship_transfer" widget="html"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <!-- GR Operation Required Document action -->
+        <record model="ir.actions.act_window" id="action_gr_operation_required_document"> 
+            <field name="name">GR Operation</field> 
+            <field name="res_model">gr.operation.required.document</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_gr_operation_required_document_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add new GR Required Document Text.
+              </p>
+            </field>
+        </record>
+        
+        <!-- GR Operation Religion Religion Tree View-->
+        <record model="ir.ui.view" id="view_religion_religion_tree">
+            <field name="name">religion.religion.tree</field>
+            <field name="model">religion.religion</field>
+            <field name="arch" type="xml">
+                <tree string="Religion List">
+                     <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- GR Operation Religion Religion Form View -->
+        <record model="ir.ui.view" id="view_religion_religion_form">
+            <field name="name">religion.religion.form</field>
+            <field name="model">religion.religion</field>
+            <field name="arch" type="xml">
+                <form string="Religion Form">
+                    <group>
+                        <field name="name" />
+                    </group>
+                    <group name="description" string="Description">
+                        <field name="description" widget="html" nolabel="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <!-- GR Operation Religion Religion action -->
+        <record model="ir.actions.act_window" id="action_religion_religion"> 
+            <field name="name">Religion</field> 
+            <field name="res_model">religion.religion</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_religion_religion_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add new Religion.
+              </p>
+            </field>
+        </record>
+
+        <!-- GR Operation Setting menu -->
+        <menuitem id="menu_gr_operation_setting" name="GR Operations" parent="saudi_base.menu_base_hr_configuration"
+            sequence="10" groups="saudi_gr.group_saudi_gr_operation_manager" />
+            
+        <!-- GR Operation Required document menu -->
+        <menuitem id="menu_gr_operation_required_document" name="GR Required Document" parent="saudi_gr.menu_gr_operation_setting"
+            sequence="10" action="action_gr_operation_required_document" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+            
+        <!-- GR Operation Religion menu -->
+        <menuitem id="menu_religion_religion" name="Religion" parent="saudi_gr.menu_gr_operation_setting"
+            sequence="15" action="action_religion_religion" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+    </data>
+</odoo>

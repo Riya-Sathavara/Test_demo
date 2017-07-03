@@ -1,0 +1,118 @@
+<odoo>
+    <data>
+        <!-- Sponsorship Transfer List view -->
+
+        <record model="ir.ui.view" id="view_sponsorship_transfer_tree">
+            <field name="name">Sponsorship Transfer.tree</field>
+            <field name="model">sponsorship.transfer</field>
+            <field name="arch" type="xml">
+                <tree string="Sponsorship Transfer List" decoration-bf="message_needaction==True">
+                    <field name="name"/>
+                    <field name="employee_id" />
+                    <field name="employee_code" />
+                    <field name="manager" />
+                    <field name="responsible_person" />
+                    <field name="state" />
+                    <field name="message_needaction_counter" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Sponsorship Transfer Form view -->
+
+        <record model="ir.ui.view" id="view_sponsorship_transfer_form">
+            <field name="name">sponsorship.transfer.form</field>
+            <field name="model">sponsorship.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Sponsorship Transfer Form">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" class="btn-primary" type="object" string="Confirm" states="draft"/>
+                        <button name="action_approve" class="btn-primary" type="object" string="Approve" states="validate" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_validate" class="btn-primary" type="object" string="Validate" states="waiting_for_approval" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_refuse" class="btn-primary" type="object" string="Refuse" states="waiting_for_approval,validate" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_cancel" class="btn-default" type="object" string="Cancel" states="draft,waiting_for_approval,validate,refuse"/> 
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"/>
+                    </header>
+                    <sheet>
+                        <group >
+                            <group>
+                                <field name="name" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="employee_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="employee_code"/>
+                            </group>
+                            <group>
+                                <field name="department_id"/>
+                                <field name="job_id" />
+                                <field name="manager" options="{'no_create': True, 'no_open': True}" attrs="{'required': [('state', 'in', ['waiting_for_approval','validate', 'approved'])], 'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="responsible_person" options="{'no_create': True, 'no_open': True}" attrs="{'required': [('state', 'in', ['waiting_for_approval','validate', 'approved'])], 'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Description" name="description">
+                                <field name="description" widget="html" placeholder="Add Description.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </page>
+                            <page string="Extra Information" name="extra_information">
+                                <group col="4">
+                                    <field name="confirmed_by" />
+                                    <field name="confirmed_date" />
+                                    <field name="validate_by" />
+                                    <field name="validate_date" />
+                                    <field name="approved_by" />
+                                    <field name="approved_date" />
+
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+                
+            </field>
+        </record>
+        
+        <!-- Sponsorship Transfer Search view -->
+        
+        <record id="view_sponsorship_transfer_search" model="ir.ui.view">
+            <field name="name">sponsorship.transfer.search</field>
+            <field name="model">sponsorship.transfer</field>
+            <field name="arch" type="xml">
+                <search string="Sponsorship Transfer Search">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="employee_code"/>
+                    <field name="manager"/>
+                    <field name="responsible_person"/>
+                    <group expand="0" string="Group By">
+                        <filter string="State" domain="" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        
+        <record model="ir.actions.act_window" id="action_sponsorship_transfer"> 
+            <field name="name">Sponsorship Transfer</field>
+            <field name="res_model">sponsorship.transfer</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_sponsorship_transfer_search"/>
+            <field name="view_id" ref="view_sponsorship_transfer_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add new Sponsorship Transfer.
+              </p>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Sponsorship Transfer" id="saudi_gr.menu_gr_sponsorship_transfer" parent="saudi_gr.menu_gr_operation" 
+            action="saudi_gr.action_sponsorship_transfer" sequence="15" groups="saudi_gr.group_saudi_gr_operation_user"/>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_maintenance_equipment_gr_user,maintenance.equipment.it.user,model_maintenance_equipment,group_saudi_it_operation_user,1,1,1,0
+access_equipment_request_it_user,equipment.request.it.user,model_equipment_request,group_saudi_it_operation_user,1,1,1,0
+access_employee_registration_it_user,employee.registration.it.user,model_employee_registration,group_saudi_it_operation_user,1,1,1,0
+access_employee_deregistration_it_user,employee.deregistration.it.user,model_employee_deregistration,group_saudi_it_operation_user,1,1,1,0
+access_employee_equipment_it_user,Employee.equipment.it.user,model_employee_equipment,group_saudi_it_operation_user,1,1,1,0
+access_employee_document_it_user,Employee.document.it.user,model_employee_document,group_saudi_it_operation_user,1,1,1,0
+,,,,,,,
+access_maintenance_equipment_it_manager,maintenance.equipment.it.manager,model_maintenance_equipment,group_saudi_it_operation_manager,1,1,1,1
+access_equipment_request_it_manager,equipment.request.it.manager,model_equipment_request,group_saudi_it_operation_manager,1,1,1,1
+access_employee_registration_it_manager,employee.registration.it.manager,model_employee_registration,group_saudi_it_operation_manager,1,1,1,1
+access_employee_deregistration_it_manager,employee.deregistration.it.manager,model_employee_deregistration,group_saudi_it_operation_manager,1,1,1,1
+access_employee_equipment_it_manager,Employee.equipment.it.manager,model_employee_equipment,group_saudi_it_operation_manager,1,1,1,1
+access_employee_document_it_manager,Employee.document.it.manager,model_employee_document,group_saudi_it_operation_manager,1,1,1,1

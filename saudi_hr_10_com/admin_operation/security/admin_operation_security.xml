@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_admin_operation">
+            <field name="name">Admin Operation</field>
+            <field name="description">Helps you manage your manufacturing processes and generate reports on those processes.</field>
+            <field name="sequence">50</field>
+        </record>
+    
+        <record id="group_admin_operation_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="admin_operation.module_admin_operation"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    
+        <record id="group_admin_operation_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="admin_operation.module_admin_operation"/>
+            <field name="implied_ids" eval="[(4, ref('admin_operation.group_admin_operation_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+        
+        <record id="base.default_user" model="res.users">
+            <field name="groups_id" eval="[(4,ref('admin_operation.group_admin_operation_user'))]"/>
+        </record>
+        
+        <!-- Record Rules for Admin Operations -->
+        <!-- User can view their own Flight Booking -->
+        <record id="admin_operation_flight_booking_user_rule" model="ir.rule">
+            <field name="name">Admin Operation User Flight Booking Rule</field>
+            <field name="model_id" ref="model_flight_booking"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.user_id','=',False)]</field>
+            <field name="groups" eval="[(4, ref('admin_operation.group_admin_operation_user'))]"/>
+        </record>
+        
+        <!-- Manager can able view all Flight Booking -->
+        <record id="admin_operation_flight_booking_manager_rule" model="ir.rule">
+            <field name="name">Admin Operation Manager Flight Booking Rule</field>
+            <field name="model_id" ref="model_flight_booking"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('admin_operation.group_admin_operation_manager'))]"/>
+        </record>
+       
+        <!-- User can view their own Hotel Booking -->
+        <record id="admin_operation_hotel_booking_user_rule" model="ir.rule">
+            <field name="name">Admin Operation User Flight Booking Rule</field>
+            <field name="model_id" ref="model_hotel_booking"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.user_id','=',False)]</field>
+            <field name="groups" eval="[(4, ref('admin_operation.group_admin_operation_user'))]"/>
+        </record>
+        
+        <!-- Manager can able view all Hotel Booking -->
+        <record id="admin_operation_hotel_booking_manager_rule" model="ir.rule">
+            <field name="name">Admin Operation Manager Flight Booking Rule</field>
+            <field name="model_id" ref="model_hotel_booking"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('admin_operation.group_admin_operation_manager'))]"/>
+        </record>
+       
+        <!-- User can view their own Ticket Details -->
+        <record id="admin_operation_ticket_details_user_rule" model="ir.rule">
+            <field name="name">Admin Operation User Ticket Details Rule</field>
+            <field name="model_id" ref="model_ticket_details"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.user_id','=',False)]</field>
+            <field name="groups" eval="[(4, ref('admin_operation.group_admin_operation_user'))]"/>
+        </record>
+        
+        <!-- Manager can able view all Ticket Details -->
+        <record id="admin_operation_ticket_details_manager_rule" model="ir.rule">
+            <field name="name">Admin Operation Manager Ticket Details Rule</field>
+            <field name="model_id" ref="model_ticket_details"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('admin_operation.group_admin_operation_manager'))]"/>
+        </record>
+    </data>
+</odoo>

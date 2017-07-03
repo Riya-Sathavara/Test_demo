@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ticket_type,access_ticket_type,model_ticket_type,,1,0,0,0
+access_travel_purpose,access_travel_purpose,model_travel_purpose,,1,0,0,0
+access_flight_booking,access_flight_booking,model_flight_booking,,1,1,1,0
+access_hotel_type,access_hotel_type,model_hotel_type,,1,0,0,0
+access_hotel_booking,access_hotel_booking,model_hotel_booking,,1,1,1,0
+access_ticket_details,access_ticket_details,model_ticket_details,,1,1,1,0

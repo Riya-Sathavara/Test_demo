@@ -1,0 +1,15 @@
+<odoo>
+	<data>
+		<!-- Added gr operation details in employee view -->
+		<record id="view_employee_form_inherit_saudi_gr" model="ir.ui.view">
+        <field name="name">hr.employee.saudi.gr</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <field name="employee_code" position="after">
+                <field name="gosi_no" />
+            </field>
+        </field>
+    </record>
+	</data>
+</odoo>

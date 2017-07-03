@@ -1,0 +1,126 @@
+<odoo>
+    <data>
+        <!-- VisaEmployee Gosi List view -->
+
+        <record model="ir.ui.view" id="view_employee_gosi_tree">
+            <field name="name">employee.gosi.tree</field>
+            <field name="model">employee.gosi</field>
+            <field name="arch" type="xml">
+                <tree string=" Employee Gosi List" decoration-bf="message_needaction==True">
+                    <field name="employee_id" />
+                    <field name="employee_code" />
+                    <field name="country_id" />
+                    <field name="type" />
+                    <field name="message_needaction_counter" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Visa Employee Gosi Form view -->
+
+        <record model="ir.ui.view" id="view_employee_gosi_form">
+            <field name="name">employee.gosi.form</field>
+            <field name="model">employee.gosi</field>
+            <field name="arch" type="xml">
+                <form string=" Employee Gosi Form">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" class="btn-primary" type="object" string="Confirm" states="draft"/>
+                        <button name="action_approve" class="btn-primary" type="object" string="Approve" states="validate" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_validate" class="btn-primary" type="object" string="Validate" states="waiting_for_approval" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_refuse" class="btn-primary" type="object" string="Refuse" states="waiting_for_approval,validate" groups="saudi_gr.group_saudi_gr_operation_manager"/>
+                        <button name="action_cancel" class="btn-default" type="object" string="Cancel" states="draft,waiting_for_approval,validate,refuse"/> 
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Employee Details">
+                                <field name="employee_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="employee_code" />
+                                <field name="department_id" />
+                                <field name="job_id" />
+                                <field name="passport_number" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="country_id" widget="selection" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </group>
+                            <group string="Gosi Details">
+                                <field name="type" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="family_card_number" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="issue_date" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="date_of_birth" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="date_of_birth_hijri" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                <field name="gosi_no" attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description" name="description">
+                                <field name="description" widget="html" placeholder="Add Description.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                            </page>
+                            <page string="Required Document" name="required_document">
+                                <group colspan="2" string="Required Document">
+                                    <field name="required_document" widget="html" nolabel="1" placeholder="Add required document list.." attrs="{'readonly': [('state', 'in', ['approved', 'refuse', 'cancel'])]}"/>
+                                   </group>
+                            </page>
+                            <page string="Extra Information" name="extra_information">
+                                <group col="4">
+                                    <field name="confirmed_by" />
+                                    <field name="confirmed_date" />
+                                    <field name="validate_by" />
+                                    <field name="validate_date" />
+                                    <field name="approved_by" />
+                                    <field name="approved_date" />
+
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+                
+            </field>
+        </record>
+        
+        <!-- Visa Employee Gosi Search view -->
+        
+        <record id="view_employee_gosi_search" model="ir.ui.view">
+            <field name="name">employee.gosi.search</field>
+            <field name="model">employee.gosi</field>
+            <field name="arch" type="xml">
+                <search string=" Employee Gosi Search">
+                    <field name="employee_id"/>
+                    <field name="employee_code"/>
+                    <field name="gosi_no"/>
+                    <field name="type"/>
+                    <field name="country_id" />
+                    <group expand="0" string="Group By">
+                        <filter string="Type" domain="" context="{'group_by':'type'}"/>
+                        <filter string="Country" domain="" context="{'group_by':'country_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        
+        <record model="ir.actions.act_window" id="action_employee_gosi_action"> 
+            <field name="name">Employee Gosi</field> 
+            <field name="res_model">employee.gosi</field> 
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_employee_gosi_search"/>
+            <field name="view_id" ref="view_employee_gosi_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add New Employee Gosi.
+              </p>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Employee Gosi" string="Employee Gosi" id="saudi_gr.menu_action_employee_gosi" parent="saudi_gr.menu_gr_operation" 
+            action="saudi_gr.action_employee_gosi_action" sequence="25" groups="saudi_gr.group_saudi_gr_operation_user"/>
+    </data>
+</odoo>
